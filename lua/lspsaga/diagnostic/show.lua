@@ -190,10 +190,7 @@ function sd:write_line(message, severity, virt_line, srow, erow)
   local indent = (' '):rep(3)
   srow = srow or -1
   erow = erow or -1
-  if message:find('\n') then
-    message = vim.split(message, '\n')
-    message = table.concat(message)
-  end
+  message = message:gsub('\n', ' ')
 
   nvim_buf_set_lines(self.bufnr, srow, erow, false, { indent .. message })
   nvim_buf_add_highlight(
